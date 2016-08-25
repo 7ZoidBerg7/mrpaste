@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         DB::table('users')->insert([
         'name'=>'admin',
-        'email'=>'web.steamflower@gmail.com',
+        'email'=>'web@gmail.com',
         'password'=>13747('pass'),
 ]);
     }
