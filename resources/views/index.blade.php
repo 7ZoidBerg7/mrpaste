@@ -20,6 +20,20 @@
                                 <textarea name="text" class="form-control" rows="16"></textarea>
                             </div>
                         
+                        <div class="form-group">
+                            <div class="col-md-5 col-md-offset-1">
+                                </br><p><b>Доступ:</b></p>
+                                <input type="radio" name="access_status" value="1" checked>Всем пользователям</br>
+                                <input type="radio" name="access_status" value="2">Только по ссылке</br>
+                                @if (Auth::guest())
+                                    <input type="radio" name="access_status" value="3" disabled><i>Только мне (нужно <a href="{{ url('/login') }}">войти</a> или <a href="{{ url('/register') }}">зарегестрироваться</a>)</br>
+                                        @else
+                                            <input type="radio" name="public" value="3">Только мне</br>
+                                @endif
+                            </div>
+                        </div>
+                        
+                        
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-5">
                                     <button type="submit" class="btn btn-primary">
