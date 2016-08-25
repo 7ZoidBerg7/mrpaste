@@ -21,13 +21,17 @@ class MsgController extends Controller
         }
         
         $all['slug'] = $code;
+        $slug = $code;
         //$all['user_id'] = Auth::user()->id;
         \App\Msgs::create($all);
+        
+        return redirect()->route('message',$slug);
+        
     }
     
     public function show($slug)
     {
-        $ms = \App\Msgs::where(['slug'=>$slug])->get();
+        $ms = \App\Msgs::where(['slug'=>$slug])->get();        
         return view('messages.message',['message'=>$ms]);
     }
     

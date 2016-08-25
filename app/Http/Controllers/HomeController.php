@@ -9,8 +9,8 @@ use App\Http\Requests;
 class HomeController extends Controller
 {
     public function index()
-    {
-        $messages = \App\Msgs::latest('created_at')->get();
+    {        
+        $messages = \App\Msgs::where('access_status', '=', '1')->latest('created_at')->get();
         return view('index',['messages'=>$messages]);
     }
 }

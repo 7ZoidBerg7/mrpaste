@@ -28,8 +28,8 @@
                                 @if (Auth::guest())
                                     <input type="radio" name="access_status" value="3" disabled><i>Только мне (нужно <a href="{{ url('/login') }}">войти</a> или <a href="{{ url('/register') }}">зарегестрироваться</a>)</br>
                                         @else
-                                            <input type="radio" name="public" value="3">Только мне</br>
-                                @endif
+                                            <input type="radio" name="access_status" value="3">Только мне</br>
+                                @endif                                
                             </div>
                         </div>
                         
@@ -59,7 +59,7 @@
                     <?php $i = 0; ?>
                     <?php //dd($messages); ?>
                     @foreach ($messages as $message)
-                        <?php $i++; ?>
+                        <?php $i++;?>
                         <h4><a href="/{{ $message->slug, ['id'=>$message->id] }}">{{$message->title}}</a></h4>
                         <small>Дата статьи: {{$message->created_at}}</small>
                         @if ($i === 8) @break;
