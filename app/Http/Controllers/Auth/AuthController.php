@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\social;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -70,5 +72,52 @@ class AuthController extends Controller
         ]);
     }
     
-    
+    public function social($provider)
+    {
+        $user = \Socialite::driver($provider)->user();
+        //dd($user);
+	$socialUser = null;
+        $userCheck = User::where('email', '=', $user->email)->first();
+        if(!empty($userCheck))
+        {
+            $socialUser = $userCheck;
+        }
+        else
+        {
+            $sameSocialId = Social::where('social_id', '=', $user->id)->where('provider', '=', $provider )->first();
+
+            if(empty($sameSocialId))
+            {
+                $newSocialUser = new User;
+                $newSocialUser->email = $user->email;
+                $name = explode(' ', $user->nickname);
+                $newSocialUser->name = $name;
+                //$newSocialUser->last_name = $name[1];
+                //$newSocialUser->name = $user->nickname;
+                $newSocialUser->save();
+                
+                $socialData = new Social;
+                $socialData->social_id = $user->id;
+                $socialData->provider= $provider;
+                $newSocialUser->social()->save($socialData);
+                
+                $socialUser = $newSocialUser;
+            }
+            else
+            {
+                $socialUser = $sameSocialId->user;
+            }
+            
+        }
+            
+            //$this->auth->login($socialUser, true);
+            auth::login($socialUser, true);
+            return redirect()->route('index');
+
+    }
+
+        
 }
+    
+    
+

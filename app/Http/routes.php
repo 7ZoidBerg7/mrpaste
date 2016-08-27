@@ -71,6 +71,28 @@ Route::group(['prefix'=>'SecretZone','middleware'=>'auth'], function()
 // **********
 
 
+Route::get(
+    '/socialite/{provider}',
+    [ 
+        'as' => 'socialite.auth',
+        function ( $provider ) {
+            return \Socialite::driver( $provider )->redirect();
+        }
+    ]
+);
+
+/*Route::get('/socialite/{provider}/callback', function ($provider) {
+	$user = \Socialite::driver($provider)->user();
+	dd($user);
+        redirect('test23.ru/');
+});*/
+    
+Route::get('/socialite/{provider}/callback', [
+    'as'    => 'social_login',
+    'uses'  => 'auth\AuthController@social'
+] );    
+
+
 
 // ___** Отображение сообщений **___
 Route::get('/{slug}', [

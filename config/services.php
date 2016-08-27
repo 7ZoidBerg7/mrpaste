@@ -34,5 +34,11 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    
+    'github' => [
+        'client_id' => '8285dee9b4c0533551a5',
+        'client_secret' => 'bffb210b8760b47efd12a86c0581ef8627c45a4e',
+        'redirect' => 'http://test23.ru/socialite/github/callback',
+    ],
 
 ];

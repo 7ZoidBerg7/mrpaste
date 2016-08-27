@@ -35,6 +35,7 @@
                                 </button>
 
                                 <a class="btn btn-link" href="{{ url('/password/email') }}">Забыли пароль?</a>
+                                <a class="btn btn-link" href="{!! route('socialite.auth', 'github') !!}">Github</a>
                             </div>
                         </div>
                     </form>
