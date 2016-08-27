@@ -6,7 +6,7 @@
             @foreach ($messages as $message)
                 <?php $i++;?>
                 <h4><a href="/{{ $message->slug, ['id'=>$message->id] }}">{{$message->title}}</a></h4>
-                <small>Дата статьи: {{$message->created_at}}</small>
+                <small>Дата: {{$message->created_at}}</small>
                 @if ($i === 8) @break;
                 @endif
             @endforeach

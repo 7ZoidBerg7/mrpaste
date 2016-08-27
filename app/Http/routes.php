@@ -37,9 +37,6 @@ Route::get('/change/{slug}', 'MsgController@change');
 Route::post('/change/{slug}', 'MsgController@changed');
 // **********
 
-
-
-
 // ___** Авторизация **___
 Route::get('/login', 'Auth\AuthController@getLogin');
 Route::post('/login', 'Auth\AuthController@My_auth');
@@ -59,18 +56,7 @@ Route::get('/password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('/password/reset', 'Auth\PasswordController@postReset');
 // **********
 
-
-
-// ___** "Админка" **___
-Route::group(['prefix'=>'SecretZone','middleware'=>'auth'], function()
-{
-     Route::get('/', [
-         'as'    =>  'SecretZone',
-         'uses'  =>  'MsgController@SecretZone']);              
-});
-// **********
-
-
+// ___** Вход через гитхаб **___
 Route::get(
     '/socialite/{provider}',
     [ 
@@ -78,15 +64,15 @@ Route::get(
         function ( $provider ) {
             return \Socialite::driver( $provider )->redirect();
         }
-    ]
-);
+    ]);
 
 Route::get('/socialite/{provider}/callback', [
     'as'    => 'social_login',
     'uses'  => 'auth\AuthController@social'
-] );    
+] );
+// **********
 
-
+//___** Поиск **___
 Route::post('/search', [
     'as'    => 'PostSearch',
     'uses'  => 'SrchController@Post_Srch'
@@ -96,7 +82,7 @@ Route::get('/search/{find_it}', [
     'as'    => 'GetSearch',
     'uses'  => 'SrchController@Get_Srch'
 ]);
-
+// **********
 
 // ___** Отображение сообщений **___
 Route::get('/{slug}', [

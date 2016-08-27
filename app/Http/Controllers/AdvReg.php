@@ -41,7 +41,7 @@ class AdvReg extends Controller
                 $u->subject('Confirm registration');
             });
 
-            return back()->with('message','Все классно, осталось подтвердить почту. Наша читерская  <a href="/register/confirm/'.$token.'">Ссылка</a> для подтверждения почты');
+            return back()->with('message','<a href="/register/confirm/'.$token.'">Ссылка для подтверждения</a>');
         }
         else {
                  return back()->with('message','Беда с базой, попробуй позже');
@@ -57,7 +57,7 @@ class AdvReg extends Controller
         $user->status=1;
         $user->save();
         $model->delete();
-        return "Регистрация закончена";
+        return back()->with('message','Всё окей');
     }
     
     public function test()

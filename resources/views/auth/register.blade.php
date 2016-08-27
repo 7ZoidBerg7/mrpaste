@@ -61,6 +61,9 @@
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
+                                <span class="help-block">
+                                    <strong>{!! Session::get('message') !!}</strong>
+                                </span>
                             </div>
                         </div>
 
