@@ -42,7 +42,7 @@ Route::post('/change/{slug}', 'MsgController@changed');
 
 // ___** Авторизация **___
 Route::get('/login', 'Auth\AuthController@getLogin');
-Route::post('/login', 'Auth\AuthController@postLogin');
+Route::post('/login', 'Auth\AuthController@My_auth');
 Route::get('/logout', 'Auth\AuthController@getLogout');
 // **********
 

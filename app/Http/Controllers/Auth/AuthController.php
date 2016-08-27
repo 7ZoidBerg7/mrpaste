@@ -9,6 +9,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -72,9 +73,19 @@ class AuthController extends Controller
         ]);
     }
     
-    
-    
-    public function social($provider)
+    public function My_auth(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password'),'status'=>'1']))
+        {
+            return redirect('/');
+        }
+        else {
+                 return back()->with('message','Не правильный логин или пароль');
+             }
+    }
+
+
+        public function social($provider)
     {
         $user = \Socialite::driver($provider)->user();
         //dd($user);

@@ -43,14 +43,9 @@
                             <div class="col-md-3">
                                 </br><p><b>Тип текста:</b></p>
                                 <input type="radio" name="lang" value="0" checked>Просто текст</br>
-                                <input type="radio" name="lang" value="1">ЯП</br>
+                                <input type="radio" name="lang" value="1">Код</br>
                             </div>
                         </div>                      
-                        
-                            
-                        
-                        
-                        
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-5">
                                     <button type="submit" class="btn btn-primary">
@@ -58,47 +53,21 @@
                                     </button>
                                 </div>
                             </div>
-                                               
                     </form>
-                    
                     @if(Session::has('message'))
                     {{Session::get('message')}}
                     @endif                    
-                    
                 </div>
             </div>
         </div>
         
+        @include('layouts.search')
+        @include('layouts.last_ten', ['$messages' => '$messages'])
         
-            
-            <form class="form-horizontal" role="form" method="POST" action="/search">
-                {{ csrf_field() }}
-                <div class="col-md-3">
-                    <input class="form-control" type="text" name="Result" placeholder="Что искать?" required>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fa-btn"></i>Поиск
-                </button>
-                
-            </form>
-                <div class="col-md-4"></br>
-                    
-            <div class="panel panel-default">
-                <div class="panel-heading">Последние 10</div>
-                <div class="panel-body">
-                    <?php $i = 0; ?>
-                    <?php //dd($messages); ?>
-                    @foreach ($messages as $message)
-                        <?php $i++;?>
-                        
-                        <h4><a href="/{{ $message->slug, ['id'=>$message->id] }}">{{$message->title}}</a></h4>
-                        <small>Дата статьи: {{$message->created_at}}</small>
-                        @if ($i === 8) @break;
-                        @endif
-                        @endforeach
-                </div>
-            </div>
-        </div>
+        @if ($your_messages != null)
+            @include('layouts.your_messages', ['$your_messages' => '$your_messages'])
+        @endif
+        
     </div>
 </div>
     

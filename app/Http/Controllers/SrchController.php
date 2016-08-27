@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Msgs;
 
 class SrchController extends Controller
 {
     public function Post_Srch(Request $request)
     {
-        //dd($request->input('Result'));
         $find_it = $request->input('Result');
-        //dd($find_it);
-        //$res = \App\Msgs::where('title', 'LIKE', $request->input('Result'))->latest('created_at')->get();
-        //dd($res);
-        //return view('messages.message',['message'=>$res]);
         return redirect()->route('GetSearch', $find_it);
     }
     
@@ -26,6 +23,16 @@ class SrchController extends Controller
         
         $ms = MsgController::get_posts();
         
-        return view('messages.SearchResults',['messages'=>$ms],['your_messages'=>$res]);
+        if (Auth::check())
+        {
+            $id = auth::id();
+            $ys = YourMsgsController::Get_Your_Posts($id);
+        }
+            else
+            {
+                $ys = null;
+            }
+        
+        return view('messages.SearchResults',['messages'=>$ms],['srch_results'=>$res])->with('your_messages',$ys);
     }
 }
