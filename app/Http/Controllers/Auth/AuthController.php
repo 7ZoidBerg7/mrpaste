@@ -72,6 +72,8 @@ class AuthController extends Controller
         ]);
     }
     
+    
+    
     public function social($provider)
     {
         $user = \Socialite::driver($provider)->user();

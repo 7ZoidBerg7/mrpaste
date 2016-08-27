@@ -81,17 +81,21 @@ Route::get(
     ]
 );
 
-/*Route::get('/socialite/{provider}/callback', function ($provider) {
-	$user = \Socialite::driver($provider)->user();
-	dd($user);
-        redirect('test23.ru/');
-});*/
-    
 Route::get('/socialite/{provider}/callback', [
     'as'    => 'social_login',
     'uses'  => 'auth\AuthController@social'
 ] );    
 
+
+Route::post('/search', [
+    'as'    => 'PostSearch',
+    'uses'  => 'SrchController@Post_Srch'
+] );
+
+Route::get('/search/{find_it}', [
+    'as'    => 'GetSearch',
+    'uses'  => 'SrchController@Get_Srch'
+]);
 
 
 // ___** Отображение сообщений **___

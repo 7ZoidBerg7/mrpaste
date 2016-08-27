@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class MsgController extends Controller
 {
+    public static function Get_Posts()
+    {
+        $ms = \App\Msgs::where('access_status', '=', '1')->
+        where(function ($query) {
+            $current_time = date('Y-m-d H:i:s', time());    
+            $query->where('live_to', '>', $current_time)
+                  ->orwhere('non_delete', '=', 1);
+            })->latest('created_at')->get();
+            
+    return($ms);
+    }
+
+
     public function save(Request $request)
     {
         $all=$request->all();

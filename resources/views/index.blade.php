@@ -8,11 +8,11 @@
                 <div class="panel-heading">Новая паста</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/') }}">
-                        {{ csrf_field() }}                       
+                        {{ csrf_field() }}
                         <input id="user_id" type="hidden" class="form-control" name="user_id" value="{{Auth::id()}}">
                         <label for="title" class="col-md-1 control-label">Заголовок:</label>
                             <div class="col-md-12">
-                                <input id="title" type="text" class="form-control" name="title">                              
+                                <input id="title" type="text" class="form-control" name="title">
                             </div>                                                                  
                                                                        
                         <label for="title" class="col-md-1 control-label">Текст:</label>
@@ -69,7 +69,20 @@
             </div>
         </div>
         
-        <div class="col-md-4 ">
+        
+            
+            <form class="form-horizontal" role="form" method="POST" action="/search">
+                {{ csrf_field() }}
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="Result" placeholder="Что искать?" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-btn"></i>Поиск
+                </button>
+                
+            </form>
+                <div class="col-md-4"></br>
+                    
             <div class="panel panel-default">
                 <div class="panel-heading">Последние 10</div>
                 <div class="panel-body">
