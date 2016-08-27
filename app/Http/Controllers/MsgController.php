@@ -19,7 +19,7 @@ class MsgController extends Controller
         while (strlen($code) < 6) {
                 $code .= $chars[mt_rand(0,$clen)];  
         }
-        //dd($all);
+        
         $all['slug'] = $code;        
         $slug = $code;
         
@@ -42,7 +42,7 @@ class MsgController extends Controller
     
     public function show($slug)
     {
-        $ms = \App\Msgs::where(['slug'=>$slug])->get();        
+        $ms = \App\Msgs::where(['slug'=>$slug])->get();
         return view('messages.message',['message'=>$ms]);
     }
     

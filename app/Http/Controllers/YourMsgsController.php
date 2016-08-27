@@ -24,6 +24,7 @@ class YourMsgsController extends Controller
             $query->where('live_to', '>', $current_time)
                   ->orwhere('non_delete', '=', 1);
             })->latest('created_at')->get();
+
         return view('messages.YourMessages',['messages'=>$ms],['your_messages'=>$ys]);
     }
     
