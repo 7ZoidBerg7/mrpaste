@@ -21,7 +21,16 @@
                             </div>
                         
                         <div class="form-group">
-                            <div class="col-md-5 col-md-offset-1">
+                            <div class="col-md-4 col-md-offset-2">
+                                </br><p><b>Удалить через:</b></p>
+                                <input type="radio" name="live_time" value="0">Не удалять</br>
+                                <input type="radio" name="live_time" value="{{1000*60*5}}">Через 5 минут</br>
+                                <input type="radio" name="live_time" value="{{1000*60*60}}" checked>Через 1 час</br>
+                                <input type="radio" name="live_time" value="{{1000*60*60*3}}">Через 3 часа</br>
+                                <input type="radio" name="live_time" value="{{1000*60*60*24*7}}">Через 1 неделю</br>
+                                <input type="radio" name="live_time" value="{{1000*60*60*24*30}}">Через 1 месяц</br>
+                            </div>
+                            <div class="col-md-4 col-md-offset-1">
                                 </br><p><b>Доступ:</b></p>
                                 <input type="radio" name="access_status" value="1" checked>Всем пользователям</br>
                                 <input type="radio" name="access_status" value="2">Только по ссылке</br>
@@ -29,9 +38,12 @@
                                     <input type="radio" name="access_status" value="3" disabled><i>Только мне (нужно <a href="{{ url('/login') }}">войти</a> или <a href="{{ url('/register') }}">зарегестрироваться</a>)</br>
                                         @else
                                             <input type="radio" name="access_status" value="3">Только мне</br>
-                                @endif                                
+                                @endif                                                                
                             </div>
-                        </div>
+                        </div>                      
+                        
+                            
+                        
                         
                         
                             <div class="form-group">

@@ -19,8 +19,8 @@ class MsgController extends Controller
         while (strlen($code) < 6) {
                 $code .= $chars[mt_rand(0,$clen)];  
         }
-        
-        $all['slug'] = $code;
+        //dd($all);
+        $all['slug'] = $code;        
         $slug = $code;
         //$all['user_id'] = Auth::user()->id;
         \App\Msgs::create($all);
