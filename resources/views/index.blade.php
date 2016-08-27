@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-3">
                                 </br><p><b>Доступ:</b></p>
-                                <input type="radio" name="access_status" value="1" checked>Всем юзерам</br>
+                                <input type="radio" name="access_status" value="1" checked>Всем пользователям</br>
                                 <input type="radio" name="access_status" value="2">Только по ссылке</br>
                                 @if (Auth::guest())
                                     <input type="radio" name="access_status" value="3" disabled><i>Только мне (нужно <a href="{{ url('/login') }}">войти</a> или <a href="{{ url('/register') }}">зарегестрироваться</a>)</br>

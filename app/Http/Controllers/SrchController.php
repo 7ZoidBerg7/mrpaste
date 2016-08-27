@@ -46,6 +46,7 @@ class SrchController extends Controller
         
         return view('messages.SearchResults',['messages'=>$ms],['srch_title_results'=>$res_title])
                 ->with('your_messages',$ys)
-                ->with('srch_text_results',$res_text);
+                ->with('srch_text_results',$res_text)
+                ->with('find_it',$find_it);
     }
 }

@@ -1,5 +1,5 @@
-<div class="col-md-4"></br>
-    <div class="panel panel-default">
+<div class="col-md-4">
+    <div class="panel panel-default right">
         <div class="panel-heading">Мои записи</div>
         <div class="panel-body">
             <?php $i = 0; ?>
