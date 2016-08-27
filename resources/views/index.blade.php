@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <div class="col-md-4 col-md-offset-2">
                                 </br><p><b>Удалить через:</b></p>
-                                <input type="radio" name="add_time" value="0">Никогда</br>
+                                <input type="radio" name="add_time" value="{{0}}">Никогда</br>
                                 <input type="radio" name="add_time" value="{{60*5}}">Через 5 минут</br>
                                 <input type="radio" name="add_time" value="{{60*60}}" checked>Через 1 час</br>
                                 <input type="radio" name="add_time" value="{{60*60*3}}">Через 3 часа</br>
@@ -72,6 +72,7 @@
                     <?php //dd($messages); ?>
                     @foreach ($messages as $message)
                         <?php $i++;?>
+                        
                         <h4><a href="/{{ $message->slug, ['id'=>$message->id] }}">{{$message->title}}</a></h4>
                         <small>Дата статьи: {{$message->created_at}}</small>
                         @if ($i === 8) @break;
