@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 ">
             <div class="panel panel-default">
-                <div class="panel-heading">Новая запись</div>
+                <div class="panel-heading">Новая паста</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/') }}">
                         {{ csrf_field() }}                       
@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <div class="col-md-4 col-md-offset-2">
                                 </br><p><b>Удалить через:</b></p>
-                                <input type="radio" name="add_time" value="0">Не удалять</br>
+                                <input type="radio" name="add_time" value="0">Никогда</br>
                                 <input type="radio" name="add_time" value="{{60*5}}">Через 5 минут</br>
                                 <input type="radio" name="add_time" value="{{60*60}}" checked>Через 1 час</br>
                                 <input type="radio" name="add_time" value="{{60*60*3}}">Через 3 часа</br>
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-4 col-md-offset-1">
                                 </br><p><b>Доступ:</b></p>
-                                <input type="radio" name="access_status" value="1" checked>Всем пользователям</br>
+                                <input type="radio" name="access_status" value="1" checked>Всем юзерам</br>
                                 <input type="radio" name="access_status" value="2">Только по ссылке</br>
                                 @if (Auth::guest())
                                     <input type="radio" name="access_status" value="3" disabled><i>Только мне (нужно <a href="{{ url('/login') }}">войти</a> или <a href="{{ url('/register') }}">зарегестрироваться</a>)</br>
