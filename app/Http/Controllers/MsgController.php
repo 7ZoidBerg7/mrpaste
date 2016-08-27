@@ -23,9 +23,16 @@ class MsgController extends Controller
         $all['slug'] = $code;        
         $slug = $code;
         
-        $live_time = time() + $all['add_time'];
-        $all['live_to'] = date('Y-m-d H:i:s', $live_time);        
-        //dd($all);
+        if ($all['add_time'] <> 0)
+            {
+                $live_time = time() + $all['add_time'];
+                $all['live_to'] = date('Y-m-d H:i:s', $live_time);
+                //dd($all);
+            }
+            else
+                {
+                    $all['non_delete'] = 1;
+                }
         
         \App\Msgs::create($all);
         
