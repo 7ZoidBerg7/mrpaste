@@ -18,8 +18,19 @@ class SrchController extends Controller
     
     public function Get_Srch($find_it)
     {
-        $res = \App\Msgs::where('title', 'LIKE', '%'.$find_it.'%')
-                ->orwhere('text', 'LIKE', '%'.$find_it.'%')->get();
+        $res_title = \App\Msgs::where('access_status', '=', '1')->
+        where(function ($query) {
+            $current_time = date('Y-m-d H:i:s', time());    
+            $query->where('live_to', '>', $current_time)
+                  ->orwhere('non_delete', '=', 1);
+            })->where('title', 'LIKE', '%'.$find_it.'%')->get();
+        
+        $res_text = \App\Msgs::where('access_status', '=', '1')->
+        where(function ($query) {
+            $current_time = date('Y-m-d H:i:s', time());    
+            $query->where('live_to', '>', $current_time)
+                  ->orwhere('non_delete', '=', 1);
+            })->where('text', 'LIKE', '%'.$find_it.'%')->get();
         
         $ms = MsgController::get_posts();
         
@@ -33,6 +44,8 @@ class SrchController extends Controller
                 $ys = null;
             }
         
-        return view('messages.SearchResults',['messages'=>$ms],['srch_results'=>$res])->with('your_messages',$ys);
+        return view('messages.SearchResults',['messages'=>$ms],['srch_title_results'=>$res_title])
+                ->with('your_messages',$ys)
+                ->with('srch_text_results',$res_text);
     }
 }
