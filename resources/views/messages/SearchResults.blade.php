@@ -21,7 +21,10 @@
                     </div>
             </div>
         </div>
-        @include('layouts.search')
+        @include('layouts.search')</br>
+        @if ($your_messages != null)
+            @include('layouts.your_messages', ['$your_messages' => '$your_messages'])
+        @endif        
         @include('layouts.last_ten', ['$messages' => '$messages'])
 
     </div>

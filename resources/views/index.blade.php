@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 ">
             <div class="panel panel-default">
-                <div class="panel-heading">Новая паста</div>
+                <div class="panel-heading">Новая запись</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/') }}">
                         {{ csrf_field() }}
@@ -60,13 +60,12 @@
                 </div>
             </div>
         </div>
-        
-        @include('layouts.search')
-        @include('layouts.last_ten', ['$messages' => '$messages'])
-        
+        @include('layouts.search')</br>        
         @if ($your_messages != null)
             @include('layouts.your_messages', ['$your_messages' => '$your_messages'])
-        @endif
+        @endif        
+        @include('layouts.last_ten', ['$messages' => '$messages'])
+        
         
     </div>
 </div>

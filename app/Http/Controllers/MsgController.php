@@ -87,10 +87,15 @@ class MsgController extends Controller
         $msg = null;
         if (auth::check())
         {
+            $messages = MsgController::Get_Posts();
+            $id = auth::id();
+            $ys = YourMsgsController::Get_Your_Posts($id);
             $msg = \App\Msgs::where('slug', '=', $slug)->where('user_id', '=', auth::id());
             if ($msg != null)
             {
-                return view('messages.ChangeMessage', ['messages' => $msg]);
+                $msg = \App\Msgs::where('slug', '=', $slug)->first();
+                return view('messages.ChangeMessage',['change_messages'=>$msg],['your_messages'=>$ys])->with('messages',$messages);
+                //return view('messages.ChangeMessage', ['messages' => $msg]);
             }
             
         }
@@ -103,15 +108,20 @@ class MsgController extends Controller
         $msg = \App\Msgs::where('slug', '=', $slug)->first();
         $msg -> title = $request['title'];
         $msg -> text = $request['text'];
+        $msg -> access_status = $request['access_status'];
+        if ($request['add_time'] <> 0)
+            {
+                $live_time = time() + $request['add_time'];
+                $msg['live_to'] = date('Y-m-d H:i:s', $live_time);
+                $msg['non_delete'] = 0;
+                //dd($all);
+            }
+            else
+                {
+                    $msg['non_delete'] = 1;
+                }
         $msg -> save();
         return redirect()->route('YourMsgs');
     }
     
-    public function SecretZone()
-    {
-        dd(auth::user());
-        if ((auth::User_Role) == 1){
-            echo 'vse ok';
-        }
-    }
 }
