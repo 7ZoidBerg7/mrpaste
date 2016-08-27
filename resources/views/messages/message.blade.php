@@ -1,14 +1,19 @@
 @extends('layouts.default')
 @section('content')   
 @foreach($message as $ms)
+
 @if($ms->access_status == 3)
     <?php $id = Auth::id(); ?>
-    @if ($ms->user_id == $id)
+    @if ($ms->user_id == $id)        
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">                      
                     <h2>{{$ms->title}}</h2>
-                    <textarea readonly name="text" class="form-control" rows="20">{{$ms->text}}</textarea>                     
+                    @if ($ms->lang == 0)
+                        <textarea readonly name="text" class="form-control" rows="20">{{$ms->text}}</textarea>
+                        @else
+                            <pre class="prettyprint">{{$ms->text}}</pre>
+                    @endif
                     <small class="col-md-offset-9">Дата статьи: {{$ms->created_at}}</small>          
                     @if ($ms->non_delete == 1)
                         <small class="col-md-offset-9">Доступно до: без ограничений</small>
@@ -19,14 +24,29 @@
             </div>
         </div>
         @else
-            <p>кышь</p>>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Ошибка доступа</div>
+                                <div class="panel-body">
+                                    <h3>Пользователь ограничил доступ к данной записи, кышь отседа</h3>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
     @endif
 @else
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">                      
             <h2>{{$ms->title}}</h2>
-            <textarea readonly name="text" class="form-control" rows="20">{{$ms->text}}</textarea>                     
+            @if ($ms->lang == 0)
+                <textarea readonly name="text" class="form-control" rows="20">{{$ms->text}}</textarea>
+                @else
+                    <pre class="prettyprint">{{$ms->text}}</pre>
+            @endif
             <small class="col-md-offset-9">Дата статьи: {{$ms->created_at}}</small>          
             @if ($ms->non_delete == 1)
             <small class="col-md-offset-9">Доступно до: без ограничений</small>

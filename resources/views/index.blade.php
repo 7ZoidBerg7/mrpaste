@@ -21,7 +21,7 @@
                             </div>
                         
                         <div class="form-group">
-                            <div class="col-md-4 col-md-offset-2">
+                            <div class="col-md-3 col-md-offset-2">
                                 </br><p><b>Удалить через:</b></p>
                                 <input type="radio" name="add_time" value="{{0}}">Никогда</br>
                                 <input type="radio" name="add_time" value="{{60*5}}">Через 5 минут</br>
@@ -30,7 +30,7 @@
                                 <input type="radio" name="add_time" value="{{60*60*24*7}}">Через 1 неделю</br>
                                 <input type="radio" name="add_time" value="{{60*60*24*30}}">Через 1 месяц</br>
                             </div>
-                            <div class="col-md-4 col-md-offset-1">
+                            <div class="col-md-3">
                                 </br><p><b>Доступ:</b></p>
                                 <input type="radio" name="access_status" value="1" checked>Всем юзерам</br>
                                 <input type="radio" name="access_status" value="2">Только по ссылке</br>
@@ -39,6 +39,11 @@
                                         @else
                                             <input type="radio" name="access_status" value="3">Только мне</br>
                                 @endif                                                                
+                            </div>
+                            <div class="col-md-3">
+                                </br><p><b>Тип текста:</b></p>
+                                <input type="radio" name="lang" value="0" checked>Просто текст</br>
+                                <input type="radio" name="lang" value="1">ЯП</br>
                             </div>
                         </div>                      
                         
