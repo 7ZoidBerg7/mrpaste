@@ -22,7 +22,11 @@ class MsgController extends Controller
         //dd($all);
         $all['slug'] = $code;        
         $slug = $code;
-        //$all['user_id'] = Auth::user()->id;
+        
+        $live_time = time() + $all['add_time'];
+        $all['live_to'] = date('Y-m-d H:i:s', $live_time);        
+        //dd($all);
+        
         \App\Msgs::create($all);
         
         return redirect()->route('message',$slug);

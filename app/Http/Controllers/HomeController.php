@@ -10,7 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {        
-        $messages = \App\Msgs::where('access_status', '=', '1')->latest('created_at')->get();
+        $current_time = date('Y-m-d H:i:s', time());
+        $messages = \App\Msgs::where('access_status', '=', '1')->where('updated_at', '=', 'live_to', 'or', 'live_to', '>', $current_time) ->latest('created_at')->get();
         return view('index',['messages'=>$messages]);
     }
 }
