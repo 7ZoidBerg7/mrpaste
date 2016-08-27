@@ -55,23 +55,46 @@ class MsgController extends Controller
     
     public function show($slug)
     {
-        $ms = \App\Msgs::where(['slug'=>$slug])->get();
+        $ms = \App\Msgs::
+        where(function ($query) {
+            $current_time = date('Y-m-d H:i:s', time());    
+            $query->where('live_to', '>', $current_time)
+                  ->orwhere('non_delete', '=', 1);
+            })->where(['slug'=>$slug])->get();
         return view('messages.message',['message'=>$ms]);
     }
     
     public function destroy($slug)
     {
-        //dd($slug);
-        $msg = \App\Msgs::where('slug', '=', $slug);
-        //dd($msg);
-        $msg -> delete();
-        return back()->with('message','Запись удалена');
+        $msg = null;
+        if (auth::check())
+        {
+            $msg = \App\Msgs::where('slug', '=', $slug)->where('user_id', '=', auth::id());
+            if ($msg != null)
+            {
+                $msg -> delete();
+                return back()->with('message','Запись удалена');
+            }
+            
+        }
+    return back()->with('message','Невозможно удалить запись');
     }
     
     public function change($slug)
     {
-        $msg = \App\Msgs::where('slug', '=', $slug)->get();
-        return view('messages.ChangeMessage', ['messages' => $msg]);
+        //$msg = \App\Msgs::where('slug', '=', $slug)->get();
+        //return view('messages.ChangeMessage', ['messages' => $msg]);
+        $msg = null;
+        if (auth::check())
+        {
+            $msg = \App\Msgs::where('slug', '=', $slug)->where('user_id', '=', auth::id());
+            if ($msg != null)
+            {
+                return view('messages.ChangeMessage', ['messages' => $msg]);
+            }
+            
+        }
+    return back()->with('message','Вы не можете изменить эту запись');        
     }
 
 
